@@ -1,0 +1,87 @@
+{
+  "caliper": {
+    "blockchain": "ethereum"
+
+  },
+  "ethereum": {
+    "url": "ws://localhost:8550",
+    "contractDeployerAddress": "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73",
+    "contractDeployerAddressPrivateKey": "8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63",
+    "fromAddress": "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73",
+    "fromAddressPrivateKey": "8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63",
+    "transactionConfirmationBlocks": 1,
+    "contracts": {
+      "erc20": {
+        "address": "0x2e1f232a9439c3d459fceca0beef13acc8259dd8",
+        "estimateGas": true,
+        "gas": {
+          "transfer": 800000,
+          "open": 450000,
+          "query": 300000
+        },
+        "abi": [
+          {
+            "constant": false,
+            "inputs": [
+              {
+                "name": "acc_id",
+                "type": "string"
+              },
+              {
+                "name": "amount",
+                "type": "int256"
+              }
+            ],
+            "name": "open",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "constant": false,
+            "inputs": [
+              {
+                "name": "acc_from",
+                "type": "string"
+              },
+              {
+                "name": "acc_to",
+                "type": "string"
+              },
+              {
+                "name": "amount",
+                "type": "int256"
+              }
+            ],
+            "name": "transfer",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "constant": true,
+            "inputs": [
+              {
+                "name": "acc_id",
+                "type": "string"
+              }
+            ],
+            "name": "query",
+            "outputs": [
+              {
+                "name": "amount",
+                "type": "int256"
+              }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+          }
+        ]
+      }
+
+    }
+  }
+}

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    caliper:
+        container_name: caliper
+        working_dir: /hyperledger/caliper/workspace
+        image: hyperledger/caliper:0.4.2
+        command: launch manager
+        network_mode: host
+        ports:
+            - "8550:8550"
+        environment:
+        - CALIPER_BIND_SUT=besu:latest
+        - CALIPER_BENCHCONFIG=benchmarks/scenario/simple/config.yaml
+        - CALIPER_NETWORKCONFIG=networks/networkconfig.json
+        - CALIPER-FLOW-SKIP-INSTALL=true
+        volumes:
+        - ./caliper-benchmarks-erc20:/hyperledger/caliper/workspace
