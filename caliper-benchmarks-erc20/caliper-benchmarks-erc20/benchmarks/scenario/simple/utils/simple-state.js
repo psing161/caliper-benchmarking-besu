@@ -60,7 +60,7 @@ class SimpleState {
     getOpenAccountArguments() {
         this.accountsGenerated++;
         return {
-//            account: this._getAccountKey(this.accountsGenerated),
+            account: this._getAccountKey(this.accountsGenerated),
             money: 100000//this.initialMoney
         };
     }

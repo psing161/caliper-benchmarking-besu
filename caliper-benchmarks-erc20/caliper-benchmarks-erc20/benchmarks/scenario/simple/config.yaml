@@ -23,35 +23,35 @@ test:
        arguments:
          << : *simple-args
          money: *money-to-transfer
-#   - label: Open
-#     description: Opening of account through deployed contract.
-#     txNumber: *number-of-accounts
-#     rateControl:
-#       type: fixed-rate
-#       opts:
-#         tps: 10
-#     workload:
-#       module: benchmarks/scenario/simple/open.js
-#       arguments: *simple-args
-#   - label: Query
-#     description: Query performance of deployed contracts.
-#     txNumber: *number-of-accounts
-#     rateControl:
-#       type: fixed-rate
-#       opts:
-#         tps: 10
-#     workload:
-#       module: benchmarks/scenario/simple/query.js
-#       arguments: *simple-args
-#   - label: transfer
-#     description: Transfering erc20 token between accounts.
-#     txNumber: 100
-#     rateControl:
-#       type: fixed-rate
-#       opts:
-#         tps: 10
-#     workload:
-#       module: benchmarks/scenario/simple/transfer.js
-#       arguments:
-#         <<: *simple-args
-#         money: *money-to-transfer
+   - label: Open
+     description: Opening of account through deployed contract.
+     txNumber: *number-of-accounts
+     rateControl:
+       type: fixed-rate
+       opts:
+         tps: 10
+     workload:
+       module: benchmarks/scenario/simple/open.js
+       arguments: *simple-args
+   - label: Query
+     description: Query performance of deployed contracts.
+     txNumber: *number-of-accounts
+     rateControl:
+       type: fixed-rate
+       opts:
+         tps: 10
+     workload:
+       module: benchmarks/scenario/simple/query.js
+       arguments: *simple-args
+   - label: transfer
+     description: Transfering erc20 token between accounts.
+     txNumber: 100
+     rateControl:
+       type: fixed-rate
+       opts:
+         tps: 10
+     workload:
+       module: benchmarks/scenario/simple/transfer.js
+       arguments:
+         <<: *simple-args
+         money: *money-to-transfer

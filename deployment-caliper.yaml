@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caliper-benchmark
+  labels:
+    app: caliper-benchmark
+  namespace: quorum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caliper-benchmark
+  template:
+    metadata:
+      labels:
+        app: caliper-benchmark
+    spec:
+      containers:
+        - name: caliper-benchmark
+          image: pratsr/caliper-benchmark:v1
+          env:
+            - name: CALIPER_BIND_SUT
+              value: besu:latest
+            - name: CALIPER_BENCHCONFIG
+              value: benchmarks/scenario/simple/config.yaml
+            - name: CALIPER_NETWORKCONFIG
+              value: networks/networkconfig.json
+            - name: CALIPER_FLOW_SKIP_INSTALL
+              value: "true"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              npx caliper bind --caliper-bind-sut besu:latest && \
+              npx caliper launch manager
+#          volumeMounts:
+#            - name: caliper-workspace
+#              mountPath: /hyperledger/caliper/workspace
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: caliper-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

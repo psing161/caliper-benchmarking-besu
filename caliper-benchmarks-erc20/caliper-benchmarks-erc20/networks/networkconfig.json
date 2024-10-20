@@ -4,7 +4,7 @@
 
   },
   "ethereum": {
-    "url": "ws://localhost:8550",
+    "url": "ws://besu-node-rpc-1.quorum.svc.cluster.local:8546",
     "contractDeployerAddress": "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73",
     "contractDeployerAddressPrivateKey": "8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63",
     "fromAddress": "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73",
@@ -12,7 +12,7 @@
     "transactionConfirmationBlocks": 1,
     "contracts": {
       "erc20": {
-        "address": "0x2e1f232a9439c3d459fceca0beef13acc8259dd8",
+        "address": "0x59f867d8c1618005c611d9fe91702b4fbdbc75fb",
         "estimateGas": true,
         "gas": {
           "transfer": 800000,
@@ -24,10 +24,12 @@
             "constant": false,
             "inputs": [
               {
+                "internalType": "string",
                 "name": "acc_id",
                 "type": "string"
               },
               {
+                "internalType": "int256",
                 "name": "amount",
                 "type": "int256"
               }
@@ -42,14 +44,17 @@
             "constant": false,
             "inputs": [
               {
+                "internalType": "string",
                 "name": "acc_from",
                 "type": "string"
               },
               {
+                "internalType": "string",
                 "name": "acc_to",
                 "type": "string"
               },
               {
+                "internalType": "int256",
                 "name": "amount",
                 "type": "int256"
               }
@@ -64,6 +69,7 @@
             "constant": true,
             "inputs": [
               {
+                "internalType": "string",
                 "name": "acc_id",
                 "type": "string"
               }
@@ -71,6 +77,7 @@
             "name": "query",
             "outputs": [
               {
+                "internalType": "int256",
                 "name": "amount",
                 "type": "int256"
               }

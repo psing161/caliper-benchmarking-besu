@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caliper-benchmark
+  labels:
+    app: caliper-benchmark
+  namespace: quorum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caliper-benchmark
+  template:
+    metadata:
+      labels:
+        app: caliper-benchmark
+    spec:
+      containers:
+        - name: caliper-benchmark
+          image: node:16-alpine
+          workingDir: /hyperledger/caliper/workspace/caliper-benchmarks
+          command:
+            - /bin/sh
+            - -c
+            - |
+              npx caliper launch manager \
+                --caliper-benchconfig benchmarks/scenario/simple/config.yaml \
+                --caliper-networkconfig networks/besu/1node-clique/networkconfig.json \
+                --caliper-workspace .
+          volumeMounts:
+            - name: caliper-workspace
+              mountPath: /hyperledger/caliper/workspace
+      initContainers:
+        # Step 1: Clone the repository and install dependencies
+        - name: clone-and-setup
+          image: node:16-alpine
+          workingDir: /hyperledger/caliper/workspace
+          command:
+            - /bin/sh
+            - -c
+            - |
+              git clone https://github.com/hyperledger/caliper-benchmarks
+              cd caliper-benchmarks
+              npm install --only=prod @hyperledger/caliper-cli
+              npx caliper bind --caliper-bind-sut besu:latest
+          volumeMounts:
+            - name: caliper-workspace
+              mountPath: /hyperledger/caliper/workspace
+      volumes:
+        - name: caliper-workspace
+          persistentVolumeClaim:
+            claimName: caliper-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: caliper-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

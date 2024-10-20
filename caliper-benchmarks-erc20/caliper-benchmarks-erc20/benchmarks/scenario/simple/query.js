@@ -46,7 +46,7 @@ class Query extends OperationBase {
         console.log("**************************");
         console.log(queryArgs);
         console.log(this.createConnectorRequest('query', queryArgs));
-        await this.sutAdapter.sendRequests(this.createConnectorRequest('query'));
+        await this.sutAdapter.sendRequests(this.createConnectorRequest('query',queryArgs));
 
     }
 }
