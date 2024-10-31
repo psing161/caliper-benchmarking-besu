@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: caliper-benchmark
-          image: pratsr/caliper-benchmark:v1
+          image: pratsr/caliper-benchmark:v3
           env:
             - name: CALIPER_BIND_SUT
               value: besu:latest
